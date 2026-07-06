@@ -4,11 +4,72 @@ import { useState, useEffect, useRef } from "react";
 const HOSTEL_NAME = "Хостел 124";
 
 const ROOMS = [
-  { id: "101", type: "Общий", beds: 6 }, { id: "102", type: "Общий", beds: 4 },
-  { id: "103", type: "Двухместный", beds: 2 }, { id: "104", type: "Одноместный", beds: 1 },
-  { id: "201", type: "Общий", beds: 8 }, { id: "202", type: "Двухместный", beds: 2 },
-  { id: "203", type: "Общий", beds: 6 }, { id: "204", type: "Одноместный", beds: 1 },
-  { id: "301", type: "Двухместный", beds: 2 }, { id: "302", type: "Общий", beds: 4 },
+  { id: "101А", section: "101", floor: 1, beds: 4 },
+  { id: "101Б", section: "101", floor: 1, beds: 4 },
+  { id: "102А", section: "102", floor: 1, beds: 4 },
+  { id: "102Б", section: "102", floor: 1, beds: 4 },
+  { id: "103А", section: "103", floor: 1, beds: 4 },
+  { id: "103Б", section: "103", floor: 1, beds: 4 },
+  { id: "201А", section: "201", floor: 2, beds: 4 },
+  { id: "201Б", section: "201", floor: 2, beds: 4 },
+  { id: "202А", section: "202", floor: 2, beds: 4 },
+  { id: "202Б", section: "202", floor: 2, beds: 4 },
+  { id: "203А", section: "203", floor: 2, beds: 4 },
+  { id: "203Б", section: "203", floor: 2, beds: 4 },
+  { id: "204А", section: "204", floor: 2, beds: 4 },
+  { id: "204Б", section: "204", floor: 2, beds: 4 },
+  { id: "205А", section: "205", floor: 2, beds: 4 },
+  { id: "205Б", section: "205", floor: 2, beds: 4 },
+  { id: "206А", section: "206", floor: 2, beds: 4 },
+  { id: "206Б", section: "206", floor: 2, beds: 4 },
+  { id: "207А", section: "207", floor: 2, beds: 4 },
+  { id: "207Б", section: "207", floor: 2, beds: 4 },
+  { id: "207В", section: "207", floor: 2, beds: 4 },
+  { id: "301А", section: "301", floor: 3, beds: 4 },
+  { id: "301Б", section: "301", floor: 3, beds: 4 },
+  { id: "302А", section: "302", floor: 3, beds: 4 },
+  { id: "302Б", section: "302", floor: 3, beds: 4 },
+  { id: "303А", section: "303", floor: 3, beds: 4 },
+  { id: "303Б", section: "303", floor: 3, beds: 4 },
+  { id: "304А", section: "304", floor: 3, beds: 4 },
+  { id: "304Б", section: "304", floor: 3, beds: 4 },
+  { id: "305А", section: "305", floor: 3, beds: 4 },
+  { id: "305Б", section: "305", floor: 3, beds: 4 },
+  { id: "306А", section: "306", floor: 3, beds: 4 },
+  { id: "306Б", section: "306", floor: 3, beds: 4 },
+  { id: "307А", section: "307", floor: 3, beds: 4 },
+  { id: "307Б", section: "307", floor: 3, beds: 4 },
+  { id: "307В", section: "307", floor: 3, beds: 4 },
+  { id: "401А", section: "401", floor: 4, beds: 4 },
+  { id: "401Б", section: "401", floor: 4, beds: 4 },
+  { id: "402А", section: "402", floor: 4, beds: 4 },
+  { id: "402Б", section: "402", floor: 4, beds: 4 },
+  { id: "403А", section: "403", floor: 4, beds: 4 },
+  { id: "403Б", section: "403", floor: 4, beds: 4 },
+  { id: "404А", section: "404", floor: 4, beds: 4 },
+  { id: "404Б", section: "404", floor: 4, beds: 4 },
+  { id: "405А", section: "405", floor: 4, beds: 4 },
+  { id: "405Б", section: "405", floor: 4, beds: 4 },
+  { id: "406А", section: "406", floor: 4, beds: 4 },
+  { id: "406Б", section: "406", floor: 4, beds: 4 },
+  { id: "407А", section: "407", floor: 4, beds: 4 },
+  { id: "407Б", section: "407", floor: 4, beds: 4 },
+  { id: "407В", section: "407", floor: 4, beds: 4 },
+  { id: "501А", section: "501", floor: 5, beds: 4 },
+  { id: "501Б", section: "501", floor: 5, beds: 4 },
+  { id: "502А", section: "502", floor: 5, beds: 4 },
+  { id: "502Б", section: "502", floor: 5, beds: 4 },
+  { id: "503А", section: "503", floor: 5, beds: 4 },
+  { id: "503Б", section: "503", floor: 5, beds: 4 },
+  { id: "504А", section: "504", floor: 5, beds: 4 },
+  { id: "504Б", section: "504", floor: 5, beds: 4 },
+  { id: "505А", section: "505", floor: 5, beds: 4 },
+  { id: "505Б", section: "505", floor: 5, beds: 4 },
+  { id: "506А", section: "506", floor: 5, beds: 4 },
+  { id: "506Б", section: "506", floor: 5, beds: 4 },
+  { id: "507А", section: "507", floor: 5, beds: 4 },
+  { id: "507Б", section: "507", floor: 5, beds: 4 },
+  { id: "507В", section: "507", floor: 5, beds: 4 }
 ];
 
 const SOURCES = ["Booking.com", "Airbnb", "Hostelworld", "Звонок", "Walk-in", "Другое"];
@@ -474,59 +535,74 @@ export default function HostelManager() {
 
           {/* ── ROOMS ── */}
           {tab === "rooms" && (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 14 }}>
-              {roomOcc.map(r => {
-                const free = r.beds - r.guests.length - r.reserved.length;
-                const pct = Math.round(((r.guests.length + r.reserved.length) / r.beds) * 100);
+            <div>
+              {/* Floor filter */}
+              {[1,2,3,4,5].map(fl => {
+                const floorRooms = roomOcc.filter(r => r.floor === fl);
+                const floorBeds = floorRooms.reduce((s,r) => s + r.beds, 0);
+                const floorOcc = floorRooms.reduce((s,r) => s + r.guests.length, 0);
                 return (
-                  <div key={r.id} style={{ background: "#141b2d", border: "1px solid #1a2840", borderRadius: 14, padding: 18 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
-                      <div>
-                        <div style={{ fontSize: 22, fontWeight: 800, letterSpacing: "-0.5px" }}>№ {r.id}</div>
-                        <div style={{ fontSize: 11, color: "#4a6080", marginTop: 2 }}>{r.type} · {r.beds} мест</div>
+                  <div key={fl} style={{ marginBottom: 24 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                      <div style={{ fontSize: 15, fontWeight: 800, color: "#60a5fa" }}>Этаж {fl}</div>
+                      <div style={{ fontSize: 12, color: "#4a6080" }}>{floorOcc} / {floorBeds} мест</div>
+                      <div style={{ flex: 1, height: 3, background: "#1a2840", borderRadius: 2, overflow: "hidden" }}>
+                        <div style={{ height: "100%", width: `${Math.round(floorOcc/floorBeds*100)}%`, background: "linear-gradient(90deg,#3b82f6,#8b5cf6)", borderRadius: 2 }} />
                       </div>
-                      <span style={{
-                        padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 700,
-                        background: free === 0 ? "rgba(239,68,68,0.12)" : "rgba(34,197,94,0.12)",
-                        color: free === 0 ? "#ef4444" : "#22c55e",
-                      }}>
-                        {free === 0 ? "Занято" : `${free} св.`}
-                      </span>
                     </div>
-                    {/* Beds visual */}
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 12 }}>
-                      {Array.from({ length: r.beds }, (_, i) => {
-                        const bed = i + 1;
-                        const active = r.guests.find(g => g.bed === bed);
-                        const reserved = r.reserved.find(g => g.bed === bed);
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: 10 }}>
+                      {floorRooms.map(r => {
+                        const free = r.beds - r.guests.length - r.reserved.length;
+                        const pct = Math.round(((r.guests.length + r.reserved.length) / r.beds) * 100);
                         return (
-                          <div key={bed} title={active?.name || reserved?.name || `Место ${bed}`} style={{
-                            width: 38, height: 38, borderRadius: 8, border: "1px solid",
-                            borderColor: active ? "#3b82f6" : reserved ? "#f59e0b" : "#1a2840",
-                            background: active ? "rgba(59,130,246,0.12)" : reserved ? "rgba(245,158,11,0.1)" : "#0a1628",
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                            fontSize: 16, cursor: active || reserved ? "help" : "default",
-                          }}>
-                            {active ? "🧍" : reserved ? "📋" : "🛏️"}
+                          <div key={r.id} style={{ background: "#141b2d", border: "1px solid #1a2840", borderRadius: 12, padding: 14 }}>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
+                              <div>
+                                <div style={{ fontSize: 16, fontWeight: 800 }}>{r.id}</div>
+                                <div style={{ fontSize: 10, color: "#4a6080" }}>Секция {r.section} · 4 места</div>
+                              </div>
+                              <span style={{
+                                padding: "2px 8px", borderRadius: 20, fontSize: 10, fontWeight: 700,
+                                background: free === 0 ? "rgba(239,68,68,0.12)" : free === r.beds ? "rgba(34,197,94,0.12)" : "rgba(245,158,11,0.12)",
+                                color: free === 0 ? "#ef4444" : free === r.beds ? "#22c55e" : "#f59e0b",
+                              }}>
+                                {free === 0 ? "Занято" : `${free} св.`}
+                              </span>
+                            </div>
+                            <div style={{ display: "flex", gap: 5, marginBottom: 8 }}>
+                              {Array.from({ length: r.beds }, (_, i) => {
+                                const bed = i + 1;
+                                const active = r.guests.find(g => g.bed === bed);
+                                const reserved = r.reserved.find(g => g.bed === bed);
+                                return (
+                                  <div key={bed} title={active?.name || reserved?.name || `Место ${bed}`} style={{
+                                    width: 32, height: 32, borderRadius: 6, border: "1px solid",
+                                    borderColor: active ? "#3b82f6" : reserved ? "#f59e0b" : "#1a2840",
+                                    background: active ? "rgba(59,130,246,0.12)" : reserved ? "rgba(245,158,11,0.1)" : "#0a1628",
+                                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14,
+                                  }}>
+                                    {active ? "🧍" : reserved ? "📋" : "🛏️"}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <div style={{ height: 3, background: "#1a2840", borderRadius: 2, overflow: "hidden" }}>
+                              <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,#3b82f6,#8b5cf6)", borderRadius: 2 }} />
+                            </div>
+                            {(r.guests.length > 0 || r.reserved.length > 0) && (
+                              <div style={{ borderTop: "1px solid #1a2840", paddingTop: 8, marginTop: 8 }}>
+                                {[...r.guests.map(g => ({ ...g, _st: "active" })), ...r.reserved.map(g => ({ ...g, _st: "reserved" }))].map(g => (
+                                  <div key={g.id} style={{ display: "flex", justifyContent: "space-between", fontSize: 11, padding: "2px 0", color: "#8aa8c8" }}>
+                                    <span>М.{g.bed} {g.name.split(" ")[0]}</span>
+                                    <span style={{ color: g._st === "active" ? "#3b82f6" : "#f59e0b" }}>до {fmt(g.checkOut)}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                           </div>
                         );
                       })}
                     </div>
-                    {/* Occupancy bar */}
-                    <div style={{ height: 4, background: "#1a2840", borderRadius: 2, overflow: "hidden", marginBottom: 10 }}>
-                      <div style={{ height: "100%", width: `${pct}%`, background: "linear-gradient(90deg,#3b82f6,#8b5cf6)", borderRadius: 2, transition: "width 0.4s" }} />
-                    </div>
-                    {/* Guest list */}
-                    {(r.guests.length > 0 || r.reserved.length > 0) && (
-                      <div style={{ borderTop: "1px solid #1a2840", paddingTop: 10 }}>
-                        {[...r.guests.map(g => ({ ...g, _st: "active" })), ...r.reserved.map(g => ({ ...g, _st: "reserved" }))].map(g => (
-                          <div key={g.id} style={{ display: "flex", justifyContent: "space-between", fontSize: 12, padding: "3px 0", color: "#8aa8c8" }}>
-                            <span>М.{g.bed} {g.name.split(" ")[0]}</span>
-                            <span style={{ color: g._st === "active" ? "#3b82f6" : "#f59e0b" }}>до {fmt(g.checkOut)}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 );
               })}
